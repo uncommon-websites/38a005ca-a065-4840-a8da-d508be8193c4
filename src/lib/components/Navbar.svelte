@@ -1,11 +1,13 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  
+  let mobileMenuOpen = $state(false);
 </script>
 
-<nav class="bg-black text-white py-4 px-6 flex items-center justify-between sticky top-0 z-50 border-b border-gray-900">
-  <div class="flex items-center gap-8">
+<nav class="bg-black text-white py-3 md:py-4 px-4 md:px-6 flex items-center justify-between sticky top-0 z-50 border-b border-gray-900">
+  <div class="flex items-center gap-4 md:gap-8">
     <a href="/" class="flex items-center gap-2">
-      <div class="w-8 h-8 text-white">
+      <div class="w-7 h-7 md:w-8 md:h-8 text-white">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             fill-rule="evenodd"
@@ -15,10 +17,10 @@
           />
         </svg>
       </div>
-      <span class="text-2xl font-medium tracking-tight">Remi</span>
+      <span class="text-xl md:text-2xl font-medium tracking-tight">Remi</span>
     </a>
     
-    <div class="hidden md:flex items-center gap-6 text-[13px] font-medium text-gray-300">
+    <div class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-gray-300">
       <a href="#services" class="hover:text-white transition-colors">Services</a>
       <a href="#how-it-works" class="hover:text-white transition-colors">How it works</a>
       <a href="#warranties" class="hover:text-white transition-colors">Warranties</a>
@@ -27,12 +29,40 @@
     </div>
   </div>
 
-  <div class="flex items-center gap-4">
-    <a href="tel:916-999-7497" class="text-gray-300 hover:text-white transition-colors text-[13px] hidden lg:block">
+  <div class="flex items-center gap-2 md:gap-4">
+    <a href="tel:916-999-7497" class="text-gray-300 hover:text-white transition-colors text-xs md:text-[13px] hidden sm:block">
       916.999.7497
     </a>
-    <a href="#quote" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-full text-[13px] font-medium transition-colors">
+    <a href="#quote" class="bg-primary-600 hover:bg-primary-700 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-[13px] font-medium transition-colors whitespace-nowrap">
       Get a quote
     </a>
+    
+    <!-- Mobile menu button -->
+    <button 
+      onclick={() => mobileMenuOpen = !mobileMenuOpen}
+      class="lg:hidden text-white p-2"
+      aria-label="Toggle menu"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {#if mobileMenuOpen}
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        {:else}
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        {/if}
+      </svg>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile menu -->
+{#if mobileMenuOpen}
+  <div class="lg:hidden bg-black border-b border-gray-900 sticky top-[57px] md:top-[65px] z-40">
+    <div class="px-4 py-4 flex flex-col gap-3 text-sm font-medium text-gray-300">
+      <a href="#services" class="hover:text-white transition-colors py-2" onclick={() => mobileMenuOpen = false}>Services</a>
+      <a href="#how-it-works" class="hover:text-white transition-colors py-2" onclick={() => mobileMenuOpen = false}>How it works</a>
+      <a href="#warranties" class="hover:text-white transition-colors py-2" onclick={() => mobileMenuOpen = false}>Warranties</a>
+      <a href="#coverage" class="hover:text-white transition-colors py-2" onclick={() => mobileMenuOpen = false}>Coverage</a>
+      <a href="#careers" class="hover:text-white transition-colors py-2" onclick={() => mobileMenuOpen = false}>Careers</a>
+    </div>
+  </div>
+{/if}

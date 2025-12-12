@@ -16,10 +16,10 @@
   import Footer from "$lib/components/Footer.svelte";
 </script>
 
-<div class="font-sans antialiased text-gray-900 bg-white">
+<div class="font-sans antialiased text-gray-900 bg-white overflow-x-hidden">
   <TopBanner />
   <Navbar />
-  <main>
+  <main class="min-h-screen">
     <Hero />
     <Intro />
     <Carousel />
